@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public static void main(String[] args) {
+    ArrayList<String> header = new ArrayList<String>(Arrays.asList("Value 1", "Value 2", "Value 3"));
+    ArrayList<ArrayList<Integer>> data = new ArrayList<ArrayList<Integer>>();
+    data.add(new ArrayList<Integer>(Arrays.asList(100, 200, 123)));
+    data.add(new ArrayList<Integer>(Arrays.asList(300, 400, 500)));
+    AppData appData = new AppData(header, data);
+
+    try {
+        appData.save("data.csv");
+        System.out.println("Data saved to data.csv");
+    } catch (IOException e) {
+        System.err.println("Error saving data to data.csv: " + e.getMessage());
+    }
+
+    try {
+        appData.load("data.csv");
+        System.out.println("Data loaded from data.csv:");
+        System.out.println(appData.header);
+        System.out.println(appData.data);
+    } catch (IOException e) {
+        System.err.println("Error loading data from data.csv: " + e.getMessage());
+    }
+}
